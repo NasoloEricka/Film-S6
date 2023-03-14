@@ -70,6 +70,25 @@ INSERT INTO TempsTravail VALUES
     (DEFAULT,'00:45:00','03:00:00')
 ;
 
+INSERT INTO Planning VALUES
+    (DEFAULT,'2023-03-15 08:00:00','2023-03-18 21:00:00'),
+    (DEFAULT,'2023-03-19 08:00:00','2023-03-21 21:00:00')
+;
+
+INSERT INTO PlanningPlateau VALUES
+    (DEFAULT,1,'08:00:00','11:00:00',1),
+    (DEFAULT,2,'13:00:00','16:00:00',1),
+    (DEFAULT,2,'08:00:00','11:00:00',2),
+    (DEFAULT,3,'13:00:00','16:00:00',2)
+;
+
+INSERT INTO PlanningScene(idPlanningScene,idScene,idPlanning,heureIdeal) VALUES
+    (DEFAULT,1,1,'09:00:00'),
+    (DEFAULT,2,1,'14:30:00'),
+    (DEFAULT,5,2,'09:00:00'),
+    (DEFAULT,6,2,'14:30:00')
+;
+
 INSERT INTO Planning VALUES 
     (DEFAULT,'2019-10-01 05:00:00','2019-10-03 00:00:00'),
     (DEFAULT,'2019-10-03 05:00:00','2019-10-05 00:00:00'),
