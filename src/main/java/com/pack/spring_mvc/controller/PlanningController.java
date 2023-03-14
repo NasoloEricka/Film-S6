@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Controller
 public class PlanningController {
@@ -59,12 +61,15 @@ public class PlanningController {
     }
 
     @PostMapping("/planifier")
-    public String planifier(@RequestParam int [] idScene,@RequestParam String [] heureIdeal, Model m, HttpSession httpSession)throws Exception{
+    public String planifier(@RequestParam String [] idScene,@RequestParam String [] heureIdeal, Model m, HttpSession httpSession)throws Exception{
         try{
             int idUtilisateur = (int)httpSession.getAttribute("idUtilisateur");
             Utilisateur utilisateur = service.findUserSession(idUtilisateur);
             m.addAttribute("utilisateur", utilisateur );
 
+            for(int i=0; i<idScene.length; i++){
+                System.out.println("EEEEEEEEEEEE "+idScene[i]);
+            }
             m.addAttribute("idScene", idScene);
             m.addAttribute("heureIdeal", heureIdeal);
 
@@ -79,12 +84,17 @@ public class PlanningController {
 
 
     @PostMapping("/valider")
-    public String valider(@RequestParam int [] idScene,@RequestParam String [] heureIdeal, @ModelAttribute Planning planning, @RequestParam int [] idPlateau, @RequestParam String [] heureDebut, @RequestParam String [] heureFin, Model m, HttpSession httpSession)throws Exception{
+    public String valider(@RequestParam String [] idScene,@RequestParam String [] heureIdeal, @RequestParam String dateDebut, @RequestParam String dateFin, @RequestParam String [] idPlateau, @RequestParam String [] heureDebut, @RequestParam String [] heureFin, Model m, HttpSession httpSession)throws Exception{
         try{
+
+            System.out.println("ETTTTT "+idScene.length+"     "+heureIdeal.length);
             int idUtilisateur = (int)httpSession.getAttribute("idUtilisateur");
             Utilisateur utilisateur = service.findUserSession(idUtilisateur);
             m.addAttribute("utilisateur", utilisateur );
 
+            Planning planning = new Planning();
+            planning.setDateDebut(LocalDateTime.parse(dateDebut));
+            planning.setDateFin(LocalDateTime.parse(dateFin));
             Planning p = planningService.createPlanning(planning, idPlateau, heureDebut, heureFin, idScene, heureIdeal);
             m.addAttribute("planning", p);
             planningSceneService.finishPlanning(p);

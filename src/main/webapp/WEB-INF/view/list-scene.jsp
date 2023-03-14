@@ -116,16 +116,15 @@
                     <div class="cs-activity cs-white_bg cs-type1">
                         <div class="cs-activity_right">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="idScene" onclick="heur()">
+                                <input class="form-check-input" type="checkbox" name="idScene" onclick="heur(<%=scene.getIdScene()%>)" value="<%=scene.getIdScene()%>">
                                 <p class="cs-activity_text">
                                     <%=scene.getTitre()%>
                                 </p>
                                 <p class="cs-activity_posted_by"><%=scene.getNomplateau()%></p>
                             </div>
                         </div>
-                        <div style="margin-left: 100px; display: none " id="time" class="cs-activity_right">
+                        <div style="margin-left: 100px; display: none " id="time<%=scene.getIdScene()%>" class="cs-activity_right">
                             <p class="cs-activity_posted_by">heur ideal :</p>
-                            <input name="heureIdeal" type="time"/>
                         </div>
                         <div class="cs-activity_icon cs-center cs-gray_bg cs-accent_color">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -157,9 +156,15 @@
 <script src="${pageContext.request.contextPath}/resources/theme/assets/js/plugins/jquery.slick.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/theme/assets/js/main.js"></script>
 <script>
-    function heur(){
-        var a =  document.getElementById('time');
+    function heur(id){
+        var check = document.getElementById(id);
+        var a =  document.getElementById('time'+id);
         a.style.display = 'flex';
+
+        e = document.createElement("input");
+        e.setAttribute("name","heureIdeal");
+        e.setAttribute("type","time");
+        a.appendChild(e);
     }
 </script>
 

@@ -3,7 +3,7 @@
 <%@ page import="com.pack.spring_mvc.model.Personnage" %>
 <%
     ArrayList<Plateau> plateaux = (ArrayList<Plateau>) request.getAttribute("plateaux");
-    int [] idScene = (int [])request.getAttribute("idScene");
+    String [] idScene = (String[])request.getAttribute("idScene");
     String [] heureIdeal = (String []) request.getAttribute("heureIdeal");
 %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -36,14 +36,14 @@
                                 <div class="col-md-3">
 
                                     <% for(int j=0; j<idScene.length; j++){ %>
-                                        <input type="hidden" name="idScene" value="<%= idScene[j] %>">
+                                        <input type="hidden" name="idScene" value="<%= Integer.parseInt(idScene[j]) %>">
                                         <input type="hidden" name="heureIdeal" value=<%= heureIdeal[j] %>>
                                     <% } %>
 
                                     
                                     <div style="width: 700px" >
-                                        <input type="datetime-local" name="dateDebut" required />
-                                        <input type="datetime-local" name="dateFin" required />
+                                        <input type="datetime-local" class="form-control" name="dateDebut" required />
+                                        <input type="datetime-local" class="form-control"name="dateFin" required />
                                     </div> <!-- /.col -->
 
                                 </div>
