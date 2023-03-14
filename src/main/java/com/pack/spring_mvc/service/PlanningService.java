@@ -22,6 +22,10 @@ public class PlanningService {
         this.dao = dao;
     }
 
+    public List<Planning> getAll(){
+        return dao.findAll(Planning.class);
+    }
+
     public Planning createPlanning(Planning planning)throws Exception{
         try{
             Planning p = dao.create(planning);

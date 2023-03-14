@@ -91,24 +91,30 @@ public class PlanningSceneService {
 
 
 
-    public void updateAllPlanningScene(List<V_PlanningSceneAdd> allscene, Planning myplanning)throws Exception{
+    public List<V_PlanningSceneAdd> updateAllPlanningScene(List<V_PlanningSceneAdd> allscene, Planning myplanning)throws Exception{
         String heuretemp="00:00:00";
         if(allscene.size()!=0){
             Timestamp mytime=Timestamp.valueOf(myplanning.getDateDebut().toString()+" "+heuretemp);
             if(allscene.get(0).getHeureideal()!=null){
                 mytime=Timestamp.valueOf(myplanning.getDateDebut().toString()+" "+allscene.get(0).getHeureideal());
                 try{
-                    List<V_PlanningSceneAdd>lsall=this.configureDateScene(mytime,Timestamp.valueOf(myplanning.getDateFin()),allscene);
-                    for(V_PlanningSceneAdd plan:lsall){
-                        this.updatePlanningScene(plan);
-                    }
+                    return this.configureDateScene(mytime,Timestamp.valueOf(myplanning.getDateFin()),allscene);
                 }
                 catch (Exception e){
                     throw new Exception(e.getMessage());
                 }
             }
         }
+        return new ArrayList<V_PlanningSceneAdd>();
     }
 
+    public void finishPlanning(Planning p)throws Exception{
+        List<V_PlanningSceneAdd>allplanscene=this.findByIdPlanning(p.getIdPlanning());
+        List<V_PlanningSceneAdd>plansceneupdate=this.updateAllPlanningScene(allplanscene,p);
+        for(V_PlanningSceneAdd scene:plansceneupdate){
+            this.updatePlanningScene(scene);
+        }
+
+    }
 
 }

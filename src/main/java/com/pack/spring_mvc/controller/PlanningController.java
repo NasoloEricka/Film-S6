@@ -1,12 +1,8 @@
 package com.pack.spring_mvc.controller;
 
 import com.pack.spring_mvc.model.Planning;
-import com.pack.spring_mvc.model.Plannings;
 import com.pack.spring_mvc.model.Utilisateur;
-import com.pack.spring_mvc.service.AuteurService;
-import com.pack.spring_mvc.service.PlanningService;
-import com.pack.spring_mvc.service.PlanningsService;
-import com.pack.spring_mvc.service.PlateauService;
+import com.pack.spring_mvc.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +19,8 @@ import java.util.List;
 public class PlanningController {
     /*@Autowired
     PlanningsService planningService;*/
-
+    @Autowired
+    PlanningSceneService planningSceneService;
     @Autowired
     PlanningService planningService;
 
@@ -72,6 +69,7 @@ public class PlanningController {
         }
     }
 
+
     @PostMapping("/valider")
     public String valider(@RequestParam String [] idScene,@RequestParam String [] heureIdeal, @RequestParam String dateDebut, @RequestParam String dateFin, @RequestParam String [] idPlateau, @RequestParam String [] heureDebut, @RequestParam String [] heureFin, Model m, HttpSession httpSession)throws Exception{
         try{
@@ -85,9 +83,9 @@ public class PlanningController {
             planning.setDateDebut(LocalDateTime.parse(dateDebut));
             planning.setDateFin(LocalDateTime.parse(dateFin));
             Planning p = planningService.createPlanning(planning, idPlateau, heureDebut, heureFin, idScene, heureIdeal);
-
             m.addAttribute("planning", p);
-            return "list-planning";
+            planningSceneService.finishPlanning(p);
+            return "list-planningscene";
         }
         catch (Exception ex){
             ex.printStackTrace();
