@@ -28,12 +28,6 @@ public class FilmsController {
     @Autowired
     private StatutService statutService;
 
-    @GetMapping("/myplan")
-    public String getAllPlanning() throws Exception{
-        //  m.addAttribute("listplanning",planningService.getAll());
-        return "create-films";
-    }
-
     @GetMapping("/create-films")
     public String createFilms(Model model, HttpSession session)throws Exception{
         return "create-films";

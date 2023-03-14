@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +28,16 @@ public class PlanningSceneService {
     public void setDao(HibernateDao dao) {
         this.dao = dao;
     }
+
+    public List<V_PlanningSceneAdd> getPlanningScene(int idPlanning){
+        Session sess=dao.getSessionFactory().openSession();
+        Criteria critere=sess.createCriteria(V_PlanningSceneAdd.class);
+        critere.add(Restrictions.eq("idplanning",idPlanning));
+        List<V_PlanningSceneAdd>planningList=critere.list();
+        sess.close();
+        return planningList;
+    }
+
 
     public PlanningPlateau findPlateauHour(int idPlateau){
         Session sess=dao.getSessionFactory().openSession();
@@ -89,6 +100,13 @@ public class PlanningSceneService {
         dao.update(p);
     }
 
+    public PlanningScene update(int id,LocalDateTime datedebut,LocalDateTime datefin){
+        PlanningScene p=dao.findById(PlanningScene.class,id);
+        p.setDateDebut(datedebut);
+        p.setDateFin(datefin);
+        dao.update(p);
+        return p;
+    }
 
 
     public List<V_PlanningSceneAdd> updateAllPlanningScene(List<V_PlanningSceneAdd> allscene, Planning myplanning)throws Exception{

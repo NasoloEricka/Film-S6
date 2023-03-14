@@ -28,22 +28,35 @@ public class PlanningController {
     @Autowired
     AuteurService service;
 
-    /*@GetMapping("/list-planning")
-    public String listPlanningByFilm(@RequestParam int idFilm, Model m, HttpSession httpSession){
+    @GetMapping("/list-planning")
+    public String listPlanningByFilm(Model m, HttpSession httpSession){
         try{
             int idUtilisateur = (int)httpSession.getAttribute("idUtilisateur");
             Utilisateur utilisateur = service.findUserSession(idUtilisateur);
-
             m.addAttribute("utilisateur", utilisateur );
-            List<List<Plannings>> allplanning=planningService.getPlanByFilm(idFilm);
-            m.addAttribute("allplanning",allplanning);
+            m.addAttribute("listplanning",planningService.getAll());
             return "list-planning";
         }
         catch (Exception ex){
             ex.printStackTrace();
             throw ex;
         }
-    }*/
+    }
+
+    @GetMapping("/list-planningscene")
+    public String listScene(@RequestParam int idPlanning,Model m, HttpSession httpSession){
+        try{
+            int idUtilisateur = (int)httpSession.getAttribute("idUtilisateur");
+            Utilisateur utilisateur = service.findUserSession(idUtilisateur);
+            m.addAttribute("utilisateur", utilisateur );
+            m.addAttribute("listscene",planningSceneService.getPlanningScene(idPlanning));
+            return "list-planningscene";
+        }
+        catch (Exception ex){
+            ex.printStackTrace();
+            throw ex;
+        }
+    }
 
     @PostMapping("/planifier")
     public String planifier(@RequestParam int [] idScene,@RequestParam String [] heureIdeal, Model m, HttpSession httpSession)throws Exception{
