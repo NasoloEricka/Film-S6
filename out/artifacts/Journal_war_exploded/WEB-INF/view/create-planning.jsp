@@ -10,7 +10,6 @@
 
 <%@ include file="navbar.jsp" %>
 
-
 <style>
 
     #farou

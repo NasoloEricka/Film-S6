@@ -89,3 +89,18 @@ INSERT INTO PlanningScene(idPlanningScene,idScene,idPlanning,heureIdeal) VALUES
     (DEFAULT,6,2,'14:30:00')
 ;
 
+INSERT INTO Planning VALUES 
+    (DEFAULT,'2019-10-01 05:00:00','2019-10-03 00:00:00'),
+    (DEFAULT,'2019-10-03 05:00:00','2019-10-05 00:00:00'),
+    (DEFAULT,'2019-10-05 05:00:00','2019-10-07 00:00:00')
+;
+
+ idplanningscene | idscene | idplanning | datedebut | datefin | heureideal
+
+INSERT INTO PlanningScene VALUES
+    (DEFAULT,1,1,'2019-10-01 05:00:00','2019-10-01 06:00:00','05:30:00'),
+    (DEFAULT,2,1,'2019-10-02 05:00:00','2019-10-05 06:00:00','06:30:00'),
+    (DEFAULT,3,1,'2019-10-05 03:00:00','2019-10-05 06:00:00','08:30:00'),
+    (DEFAULT,4,1,'2019-10-06 02:00:00','2019-10-06 04:00:00','03:30:00'),
+    (DEFAULT,5,1,'2019-10-06 05:00:00','2019-10-07 00:00:00','05:30:00')
+;
