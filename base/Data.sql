@@ -101,5 +101,22 @@ INSERT INTO Planning VALUES
     (DEFAULT,'2019-10-03','2019-10-05'),
     (DEFAULT,'2019-10-05','2019-10-07')
 ;
+INSERT INTO JourFerier VALUES
+    (DEFAULT,'2023-01-01','Jour de l''an'),
+    (DEFAULT,'2023-03-08','Journée internationale de la femme'),
+    (DEFAULT,'2023-03-29','Jour des Martyrs'),
+    (DEFAULT,'2023-04-09','Pâques'),
+    (DEFAULT,'2023-04-10','Lundi de pâques'),
+    (DEFAULT,'2023-04-21','Id al Fitr'),
+    (DEFAULT,'2023-05-01','Fête de travail'),
+    (DEFAULT,'2023-05-18','Ascension'),
+    (DEFAULT,'2023-05-28','Pentecôte'),
+    (DEFAULT,'2023-05-29','Lundi de pentecôte'),
+    (DEFAULT,'2023-06-26','Fete de l''indépendance'),
+    (DEFAULT,'2023-06-28','Id al Adha'),
+    (DEFAULT,'2023-08-15','Assomption'),
+    (DEFAULT,'2023-11-01','Toussaint'),
+    (DEFAULT,'2023-12-25','Jour de Noël')
+;
 
 
