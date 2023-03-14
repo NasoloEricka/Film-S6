@@ -98,7 +98,7 @@ public class PlanningController {
             Planning p = planningService.createPlanning(planning, idPlateau, heureDebut, heureFin, idScene, heureIdeal);
             m.addAttribute("planning", p);
             planningSceneService.finishPlanning(p);
-            return "list-planningscene";
+            return "redirect:list-planning";
         }
         catch (Exception ex){
             ex.printStackTrace();

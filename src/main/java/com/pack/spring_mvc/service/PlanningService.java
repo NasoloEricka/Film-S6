@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Time;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
 
 @Service
 public class PlanningService {
@@ -92,6 +94,7 @@ public class PlanningService {
             return p;
         }
         catch (Exception e){
+            e.printStackTrace();
             throw e;
         }
     }

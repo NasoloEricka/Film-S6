@@ -57,7 +57,17 @@ CREATE OR REPLACE VIEW V_PlanningSceneAdd AS
         JOIN Scenario ON Scenario.idScene=PlanningScene.idScene
     GROUP BY 
         PlanningScene.idPlanningScene,PlanningScene.idScene,PlanningScene.idPlanning,
-        PlanningScene.dateDebut,PlanningScene.dateFin,PlanningScene.heureIdeal,Scene.idPlateau
+        PlanningScene.heureIdeal,Scene.idPlateau
+    ORDER BY 
+        PlanningScene.idPlanningScene
 ;
 
 
+SELECT 
+    PlanningScene.*
+FROM 
+    PlanningScene
+JOIN 
+    Scene ON Scene.idScene=PlanningScene.idScene
+     JOIN Scenario ON Scenario.idScene=PlanningScene.idScene
+;

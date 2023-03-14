@@ -137,8 +137,8 @@ CREATE TABLE PlanningScene(
     idPlanningScene SERIAL NOT NULL,
     idScene INT4 NOT NULL,
     idPlanning INT4 NOT NULL,
-    dateDebut timestamp,
-    dateFin timestamp,
+    dateDebut timestamp DEFAULT now(),
+    dateFin timestamp DEFAULT now(),
     heureIdeal time,
     PRIMARY KEY (idPlanningScene)
 );

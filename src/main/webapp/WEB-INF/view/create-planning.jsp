@@ -57,7 +57,7 @@
 
                                     </div>
 
-                                    <button class="btn btn-primary" onClick="ajouterPiece()">Plateau++</button>
+                                    <button class="btn btn-primary" type="button" onClick="ajouterPiece()">Plateau++</button>
                                     <div id="farou">
 
 

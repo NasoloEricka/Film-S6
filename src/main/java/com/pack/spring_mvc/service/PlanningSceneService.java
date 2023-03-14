@@ -40,13 +40,11 @@ public class PlanningSceneService {
 
 
     public PlanningPlateau findPlateauHour(int idPlateau){
-        Session sess=dao.getSessionFactory().openSession();
-        Criteria critere=sess.createCriteria(PlanningPlateau.class);
-        critere.add(Restrictions.eq("idplateau",idPlateau));
-        List<PlanningPlateau>planningPlateauList=critere.list();
-        sess.close();
-        if(planningPlateauList.size()!=0){
-            return planningPlateauList.get(0);
+        List<PlanningPlateau>planningPlateauList=dao.findAll(PlanningPlateau.class);
+        for(PlanningPlateau planningPlateau:planningPlateauList){
+            if(planningPlateau.getPlateau().getIdPlateau()==idPlateau){
+                return planningPlateau;
+            }
         }
         return null;
     }
@@ -56,6 +54,7 @@ public class PlanningSceneService {
         Criteria critere=sess.createCriteria(V_PlanningSceneAdd.class);
         critere.add(Restrictions.eq("idplanning",idPlanning));
         List<V_PlanningSceneAdd>vplanningscene=critere.list();
+        System.out.println("re"+vplanningscene.size());
         sess.close();
         return vplanningscene;
     }
@@ -75,8 +74,8 @@ public class PlanningSceneService {
     public List<V_PlanningSceneAdd> configureDateScene(Timestamp debut, Timestamp datefin, List<V_PlanningSceneAdd>allscene)throws Exception{
         List<V_PlanningSceneAdd> sceneHour=new ArrayList<>();
         for(V_PlanningSceneAdd scene:allscene){
-            Timestamp fin=new Timestamp(debut.getTime()+scene.getTotalduree());
-            if(this.checkPlateauDispo(scene)){
+            Timestamp fin=new Timestamp(debut.getTime()+(scene.getTotalduree()*1000));
+            if(!(this.checkPlateauDispo(scene))){
                 throw new Exception("Aucun Plateau Disponible pour la scene "+scene.getIdscene());
             }
             if(fin.getTime()>datefin.getTime()){
@@ -86,7 +85,7 @@ public class PlanningSceneService {
             scene.setDatefin(fin.toLocalDateTime());
             sceneHour.add(scene);
             debut=Timestamp.valueOf(new Date(fin.getTime()).toString()+" "+scene.getHeureideal().toString());
-            if(fin.getTime()<debut.getTime()){
+            if(fin.getTime()>debut.getTime()){
                 debut=fin;
             }
         }
@@ -112,9 +111,11 @@ public class PlanningSceneService {
     public List<V_PlanningSceneAdd> updateAllPlanningScene(List<V_PlanningSceneAdd> allscene, Planning myplanning)throws Exception{
         String heuretemp="00:00:00";
         if(allscene.size()!=0){
-            Timestamp mytime=Timestamp.valueOf(myplanning.getDateDebut().toString()+" "+heuretemp);
+            Timestamp mytime=Timestamp.valueOf(myplanning.getDateDebut());
             if(allscene.get(0).getHeureideal()!=null){
-                mytime=Timestamp.valueOf(myplanning.getDateDebut().toString()+" "+allscene.get(0).getHeureideal());
+                Timestamp tempmytime=Timestamp.valueOf(new Date(Timestamp.valueOf(myplanning.getDateDebut()).getTime())+" "+allscene.get(0).getHeureideal());
+                if(tempmytime.getTime()>=mytime.getTime())
+                    mytime=tempmytime;
                 try{
                     return this.configureDateScene(mytime,Timestamp.valueOf(myplanning.getDateFin()),allscene);
                 }
