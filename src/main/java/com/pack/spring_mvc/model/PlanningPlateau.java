@@ -2,10 +2,8 @@ package com.pack.spring_mvc.model;
 
 import javax.persistence.*;
 import java.sql.Time;
-
 @Entity
 public class PlanningPlateau {
-
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     @Column( name = "idplanningplateau")

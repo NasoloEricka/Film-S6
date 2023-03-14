@@ -46,3 +46,18 @@ CREATE OR REPLACE VIEW V_Dialogue AS
     FROM 
         Dialogue JOIN Personnage ON Personnage.idPersonnage=Dialogue.idPersonnage
 ;
+
+
+CREATE OR REPLACE VIEW V_PlanningSceneAdd AS 
+    SELECT
+        PlanningScene.*,Scene.idPlateau,
+        sum((SELECT EXTRACT (EPOCH FROM duree))) as totalduree
+    FROM 
+        PlanningScene JOIN Scene ON Scene.idScene=PlanningScene.idScene
+        JOIN Scenario ON Scenario.idScene=PlanningScene.idScene
+    GROUP BY 
+        PlanningScene.idPlanningScene,PlanningScene.idScene,PlanningScene.idPlanning,
+        PlanningScene.dateDebut,PlanningScene.dateFin,PlanningScene.heureIdeal,Scene.idPlateau
+;
+
+
