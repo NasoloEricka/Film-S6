@@ -1,17 +1,10 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="Film-S6:war exploded">
-    <output-path>$PROJECT_DIR$/target/Journal-1.0-SNAPSHOT</output-path>
-    <properties id="maven-jee-properties">
-      <options>
-        <exploded>true</exploded>
-        <module>Film-S6</module>
-        <packaging>war</packaging>
-      </options>
-    </properties>
+  <artifact type="exploded-war" name="Journal:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/Journal_war_exploded</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
-          <element id="module-output" name="Film-S6" />
+          <element id="module-output" name="Journal" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: org.springframework:spring-core:5.3.23" />
@@ -53,10 +46,7 @@
           <element id="library" level="project" name="Maven: commons-io:commons-io:2.11.0" />
         </element>
       </element>
-      <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/target/Journal-1.0-SNAPSHOT/META-INF/MANIFEST.MF" />
-      </element>
-      <element id="javaee-facet-resources" facet="Film-S6/web/Web" />
+      <element id="javaee-facet-resources" facet="Journal/web/Web" />
     </root>
   </artifact>
 </component>

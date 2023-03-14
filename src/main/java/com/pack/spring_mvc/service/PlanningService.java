@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Time;
+import java.util.List;
 
 @Service
 public class PlanningService {
@@ -19,6 +20,10 @@ public class PlanningService {
 
     public void setDao(HibernateDao dao) {
         this.dao = dao;
+    }
+
+    public List<Planning> getAll(){
+        return dao.findAll(Planning.class);
     }
 
     public Planning createPlanning(Planning planning)throws Exception{
