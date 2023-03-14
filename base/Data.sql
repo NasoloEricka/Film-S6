@@ -29,14 +29,21 @@ INSERT INTO Plateau VALUES
     (DEFAULT,'Ocean Atlantique')
 ;
 
+INSERT INTO StatutScene VALUES
+    (DEFAULT,'Creer',0),
+    (DEFAULT,'Ecriture en cours',5),
+    (DEFAULT,'Ecriture Termine',10),
+    (DEFAULT,'Scene Plannifie',15)
+;
+
 INSERT INTO Scene VALUES
-    (DEFAULT,'Scene de guerre',1,1),
-    (DEFAULT,'Comerage autour du hero',2,1),
-    (DEFAULT,'Est-ce le fin',1,1),
-    (DEFAULT,'Scene de comedie',1,1),
-    (DEFAULT,'La quete du hero',2,2),
-    (DEFAULT,'Petite culture',3,2),
-    (DEFAULT,'Un suspens bien attendu',1,2)
+    (DEFAULT,'Scene de guerre',1,1,DEFAULT),
+    (DEFAULT,'Comerage autour du hero',2,1,DEFAULT),
+    (DEFAULT,'Est-ce le fin',1,1,DEFAULT),
+    (DEFAULT,'Scene de comedie',1,1,DEFAULT),
+    (DEFAULT,'La quete du hero',2,2,DEFAULT),
+    (DEFAULT,'Petite culture',3,2,DEFAULT),
+    (DEFAULT,'Un suspens bien attendu',1,2,DEFAULT)
 ;
 
 INSERT INTO Type VALUES 
@@ -71,36 +78,28 @@ INSERT INTO TempsTravail VALUES
 ;
 
 INSERT INTO Planning VALUES
-    (DEFAULT,'2023-03-15 08:00:00','2023-03-18 21:00:00'),
-    (DEFAULT,'2023-03-19 08:00:00','2023-03-21 21:00:00')
+    (DEFAULT,'2023-03-15','2023-03-18'),
+    (DEFAULT,'2023-03-19','2023-03-21')
 ;
 
-INSERT INTO PlanningPlateau VALUES
-    (DEFAULT,1,'08:00:00','11:00:00',1),
-    (DEFAULT,2,'13:00:00','16:00:00',1),
-    (DEFAULT,2,'08:00:00','11:00:00',2),
-    (DEFAULT,3,'13:00:00','16:00:00',2)
+INSERT INTO PlateauIndisponible VALUES
+    (DEFAULT,1,'2023-03-10',DEFAULT),
+    (DEFAULT,2,'2023-04-15',DEFAULT),
+    (DEFAULT,2,'2023-04-25',DEFAULT),
+    (DEFAULT,3,'2023-05-10',DEFAULT)
 ;
 
-INSERT INTO PlanningScene(idPlanningScene,idScene,idPlanning,heureIdeal) VALUES
-    (DEFAULT,1,1,'09:00:00'),
-    (DEFAULT,2,1,'14:30:00'),
-    (DEFAULT,5,2,'09:00:00'),
-    (DEFAULT,6,2,'14:30:00')
+INSERT INTO PlanningScene(idPlanningScene,idScene,idPlanning,idPlateau,datePlanning) VALUES
+    (DEFAULT,1,1,2,'2023-03-15'),
+    (DEFAULT,2,1,1,'2023-04-10'),
+    (DEFAULT,5,2,1,'2023-03-15'),
+    (DEFAULT,6,2,3,'2023-04-10')
 ;
 
 INSERT INTO Planning VALUES 
-    (DEFAULT,'2019-10-01 05:00:00','2019-10-03 00:00:00'),
-    (DEFAULT,'2019-10-03 05:00:00','2019-10-05 00:00:00'),
-    (DEFAULT,'2019-10-05 05:00:00','2019-10-07 00:00:00')
+    (DEFAULT,'2019-10-01','2019-10-03'),
+    (DEFAULT,'2019-10-03','2019-10-05'),
+    (DEFAULT,'2019-10-05','2019-10-07')
 ;
 
- idplanningscene | idscene | idplanning | datedebut | datefin | heureideal
 
-INSERT INTO PlanningScene VALUES
-    (DEFAULT,1,1,'2019-10-01 05:00:00','2019-10-01 06:00:00','05:30:00'),
-    (DEFAULT,2,1,'2019-10-02 05:00:00','2019-10-05 06:00:00','06:30:00'),
-    (DEFAULT,3,1,'2019-10-05 03:00:00','2019-10-05 06:00:00','08:30:00'),
-    (DEFAULT,4,1,'2019-10-06 02:00:00','2019-10-06 04:00:00','03:30:00'),
-    (DEFAULT,5,1,'2019-10-06 05:00:00','2019-10-07 00:00:00','05:30:00')
-;

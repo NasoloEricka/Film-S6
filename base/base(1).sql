@@ -1,5 +1,7 @@
-create database film;
 CREATE USER film WITH PASSWORD 'film';
+
+drop database film;
+create database film;
 GRANT ALL PRIVILEGES ON DATABASE film to film;
 ALTER DATABASE film OWNER TO film;
 
@@ -117,31 +119,47 @@ CREATE TABLE TempsTravail(
 
 CREATE TABLE Planning(
     idPlanning SERIAL NOT NULL,
-    dateDebut timestamp NOT NULL,
-    dateFin timestamp NOT NULL,
+    dateDebut date NOT NULL,
+    dateFin date NOT NULL,
     PRIMARY KEY (idPlanning)
 );
 
-CREATE TABLE PlanningPlateau(
-    idPlanningPlateau SERIAL NOT NULL,
+CREATE TABLE PlateauIndisponible(
+    idPlateauIndisponible SERIAL NOT NULL,
     idPlateau INT4 NOT NULL,
-    heure_debut time NOT NULL,
-    heure_fin time NOT NULL,
-    PRIMARY KEY (idPlanningPlateau)
+    dateNonDispo date NOT NULL,
+    observation varchar(50) DEFAULT NULL,
+    PRIMARY KEY (idPlateauIndisponible)
 );
-ALTER TABLE PlanningPlateau ADD FOREIGN KEY (idPlateau) REFERENCES Plateau(idPlateau) ;
-ALTER  TABLE PlanningPlateau ADD COLUMN idPlanning INT4 NOT NULL;
-ALTER TABLE PlanningPlateau ADD FOREIGN KEY (idPlanning) REFERENCES Planning(idPlanning) ;
+ALTER TABLE PlateauIndisponible ADD FOREIGN KEY (idPlateau) REFERENCES Plateau(idPlateau) ;
 
 CREATE TABLE PlanningScene(
     idPlanningScene SERIAL NOT NULL,
     idScene INT4 NOT NULL,
     idPlanning INT4 NOT NULL,
-    dateDebut timestamp DEFAULT now(),
-    dateFin timestamp DEFAULT now(),
-    heureIdeal time,
+    idPlateau INT4 NOT NULL,
+    datePlanning date DEFAULT now(),
     PRIMARY KEY (idPlanningScene)
 );
 ALTER TABLE PlanningScene ADD FOREIGN KEY (idScene) REFERENCES Scene(idScene);
+ALTER TABLE PlanningScene ADD FOREIGN KEY (idPlateau) REFERENCES Plateau(idPlateau) ;
 ALTER TABLE PlanningScene ADD FOREIGN KEY (idPlanning) REFERENCES Planning(idPlanning);
+
+CREATE TABLE StatutScene(
+  idStatutScene SERIAL NOT NULL,
+  designation varchar(50),
+  valeur int,
+  PRIMARY KEY (idStatutScene)
+);
+
+ALTER TABLE Scene add COLUMN idStatutScene INT NOT NULL DEFAULT 1;
+ALTER TABLE Scene add FOREIGN KEY (idStatutScene) REFERENCES StatutScene(idStatutScene);
+
+CREATE TABLE JourFerier(
+  idJourFerier SERIAL NOT NULL,
+  dateJourFerier date NOT NULL,
+  motif varchar(50),
+  PRIMARY KEY(idJourFerier)
+);
+
 
